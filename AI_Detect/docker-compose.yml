@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  ai:
+    image: python:3.11-slim
+    working_dir: /app
+    command: bash -lc "pip install -r requirements.txt && uvicorn serve_infer:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    environment:
+      - MODEL_PATH=/app/iforest_sqlbf.joblib
+  logtailer:
+    image: python:3.11-slim
+    working_dir: /app
+    depends_on: [ai]
+    command: bash -lc "pip install -r requirements.txt && python log_replay.py --access-log /logs/access.log --infer-url http://ai:8000/score"
+    volumes:
+      - ./:/app
+      # Map log thật của bạn vào /logs/access.log (sửa đường dẫn bên trái cho đúng máy bạn)
+      - /var/log/nginx/access.log:/logs/access.log:ro
+      - /var/log/ai-security/:/var/log/ai-security/

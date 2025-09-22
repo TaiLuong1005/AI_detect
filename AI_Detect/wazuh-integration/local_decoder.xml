@@ -1,0 +1,6 @@
+<decoders>
+  <decoder name="ai-security-json">
+    <prematch>AISEC</prematch>
+    <json_decoder/>
+  </decoder>
+</decoders>

@@ -1,0 +1,17 @@
+<group name="ai,">
+  <rule id="980100" level="10">
+    <if_decoder_name>ai-security-json</if_decoder_name>
+    <field name="sev">high</field>
+    <description>AI detected web attack (HIGH): src_ip $(src_ip) reasons $(reasons)</description>
+    <mitre>
+      <id>T1110</id>
+      <id>T1190</id>
+    </mitre>
+  </rule>
+
+  <rule id="980101" level="8">
+    <if_decoder_name>ai-security-json</if_decoder_name>
+    <field name="sev">med</field>
+    <description>AI detected web anomaly (MED): src_ip $(src_ip) reasons $(reasons)</description>
+  </rule>
+</group>

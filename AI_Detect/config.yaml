@@ -1,0 +1,19 @@
+# Đường dẫn log mặc định (có thể override bằng CLI)
+nginx_access_log: /var/log/nginx/access.log
+
+# File alert JSON để Wazuh đọc
+wazuh_alert_file: /var/log/ai-security/alerts.log
+
+thresholds:
+  score_med: 0.60
+  score_high: 0.80
+  brute_force_min_fails_5m: 10
+
+enable_fail2ban: true
+ban_minutes_default: 30
+
+# Đường dẫn script ban IP
+ban_script: actions/ban_ip.sh
+
+# Endpoint AI
+infer_url: http://127.0.0.1:8000/score
